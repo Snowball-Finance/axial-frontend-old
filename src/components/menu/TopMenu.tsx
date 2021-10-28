@@ -3,7 +3,6 @@ import "./TopMenu.scss"
 import React, { ReactElement } from "react"
 
 import { Link } from "react-router-dom"
-import ThemeChanger from "../theme-change/ThemeChanger"
 import Web3Status from "../web3-status/Web3Status"
 import classNames from "classnames"
 import logo from "../../assets/icons/logo.svg"
@@ -61,7 +60,6 @@ function TopMenu({ activeTab }: Props): ReactElement {
         </li>
       </ul>
       <Web3Status />
-      <ThemeChanger />
     </header>
   )
 }

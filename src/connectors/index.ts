@@ -29,7 +29,7 @@ export function getNetworkLibrary(): BaseProvider {
 export const injected = new InjectedConnector({
   // mainnet, ropsten, rinkeby, goerli, kovan, local buidler
   // see: https://github.com/ethereum/EIPs/blob/master/EIPS/eip-155.md
-  supportedChainIds: [1, 31337],
+  supportedChainIds: [1, 43114],
 })
 
 export const walletconnect = new WalletConnectConnector({

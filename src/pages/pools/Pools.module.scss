@@ -35,7 +35,7 @@ div.poolsPage {
 
     &.selected {
       background-color: $yellow;
-      color: $text-black;
+      color: var(--text);
     }
   }
 
