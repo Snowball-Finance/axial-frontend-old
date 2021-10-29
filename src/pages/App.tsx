@@ -67,7 +67,7 @@ function GasAndTokenPrices({
   children,
 }: React.PropsWithChildren<unknown>): ReactElement {
   const dispatch = useDispatch<AppDispatch>()
-  //const { chainId, library } = useActiveWeb3React()
+  //const { library } = useActiveWeb3React()
 
   const fetchAndUpdateGasPrice = useCallback(() => {
     void fetchGasPrices(dispatch)
@@ -82,8 +82,8 @@ function GasAndTokenPrices({
   }, [dispatch])
 
   usePoller(fetchAndUpdateGasPrice, 5 * 1000)
-  usePoller(fetchAndUpdateTokensPrice, BLOCK_TIME * 3)
-  usePoller(fetchAndUpdateSwapStats, BLOCK_TIME * 280) // ~ 1hr
+  usePoller(fetchAndUpdateTokensPrice, BLOCK_TIME * 120)
+  //usePoller(fetchAndUpdateSwapStats, BLOCK_TIME * 2 * 60 * 60) // ~ 1hr
 
   return <>{children}</>
 }

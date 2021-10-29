@@ -30,11 +30,6 @@ export default function usePoolTVLs(): { [poolName in PoolName]?: BigNumber } {
       const ethcallProvider = new Provider() as MulticallProvider
 
       await ethcallProvider.init(library)
-      // override the contract address when using hardhat
-      if (chainId == ChainId.HARDHAT) {
-        ethcallProvider.multicallAddress =
-          "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f"
-      }
 
       const pools = Object.values(POOLS_MAP)
       const supplyCalls = pools
@@ -45,6 +40,7 @@ export default function usePoolTVLs(): { [poolName in PoolName]?: BigNumber } {
           ) as MulticallContract<LpTokenUnguarded>
         })
         .map((c) => c.totalSupply())
+
       const tvls = await ethcallProvider.all(supplyCalls, {})
       const tvlsUSD = pools.map((pool, i) => {
         const tvlAmount = tvls[i]

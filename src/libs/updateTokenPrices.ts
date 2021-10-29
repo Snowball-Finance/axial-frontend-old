@@ -11,13 +11,12 @@ interface CoinGeckoReponse {
   }
 }
 const otherTokens = {
-  ETH: "ethereum",
-  WETH: "ethereum",
-  VETH2: "ethereum", // TODO: pull vETH2 price once it's added to coingecko
-  BTC: "bitcoin",
-  KEEP: "keep-network",
-  SGT: "sharedstake-governance-token",
-  ALCX: "alchemix",
+  AVAX: "avalanche-2",
+  USDT: "tether",
+  DAI: "dai",
+  USDC: "usd-coin",
+  TUSD: "true-usd",
+  FRAX: "frax",
 }
 
 export default function fetchTokenPricesUSD(dispatch: AppDispatch): void {

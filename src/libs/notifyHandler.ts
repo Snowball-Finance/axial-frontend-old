@@ -3,7 +3,7 @@ import { getEtherscanLink } from "./getEtherscanLink"
 import i18next from "i18next"
 
 const notifyNetworks = new Set([1, 3, 4, 5, 42, 56, 100])
-const chainId = parseInt(process.env.REACT_APP_CHAIN_ID ?? "1")
+const chainId = parseInt(process.env.REACT_APP_CHAIN_ID ?? "43114")
 
 export const notify = Notify({
   ...(isChainSupportedByNotify(chainId)

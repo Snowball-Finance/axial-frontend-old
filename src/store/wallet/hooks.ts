@@ -20,11 +20,6 @@ export function usePoolTokenBalances(): { [token: string]: BigNumber } | null {
       if (!library || !chainId || !account) return
 
       await ethcallProvider.init(library)
-      // override the contract address when using hardhat
-      if (chainId == ChainId.HARDHAT) {
-        ethcallProvider.multicallAddress =
-          "0xa85233C63b9Ee964Add6F2cffe00Fd84eb32338f"
-      }
 
       const tokens = Object.values(TOKENS_MAP)
       const balanceCalls = tokens
@@ -35,6 +30,7 @@ export function usePoolTokenBalances(): { [token: string]: BigNumber } | null {
           ) as MulticallContract<Erc20>
         })
         .map((c) => c.balanceOf(account))
+
       const balances = await ethcallProvider.all(balanceCalls, {})
 
       const ethBalance = await library.getBalance(account)
