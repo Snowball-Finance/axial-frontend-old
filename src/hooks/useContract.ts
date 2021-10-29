@@ -61,8 +61,8 @@ export function useTokenContract(
 export function useSwapContract<T extends PoolName>(
   poolName?: T,
 ): T extends typeof STABLECOIN_POOL_NAME
-  ? SwapGuarded | null
-  : SwapFlashLoan | SwapFlashLoanNoWithdrawFee | MetaSwapDeposit | null
+  ? SwapFlashLoanNoWithdrawFee | null
+  : SwapFlashLoan | SwapGuarded | MetaSwapDeposit | null
 export function useSwapContract(
   poolName?: PoolName,
 ):

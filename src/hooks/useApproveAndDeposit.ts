@@ -16,8 +16,6 @@ import { IS_PRODUCTION } from "../libs/environment"
 import META_SWAP_ABI from "../constants/abis/metaSwap.json"
 import { MetaSwap } from "../../types/ethers-contracts/MetaSwap"
 import { NumberInputState } from "../libs/numberInputState"
-import { SwapFlashLoan } from "../../types/ethers-contracts/SwapFlashLoan"
-import { SwapFlashLoanNoWithdrawFee } from "../../types/ethers-contracts/SwapFlashLoanNoWithdrawFee"
 import checkAndApproveTokenForTrade from "../libs/checkAndApproveTokenForTrade"
 import { parseUnits } from "@ethersproject/units"
 import { subtractSlippage } from "../libs/slippage"
@@ -128,7 +126,7 @@ export function useApproveAndDeposit(
       if (isFirstTransaction) {
         minToMint = BigNumber.from("0")
       } else {
-        minToMint = await (effectiveSwapContract as SwapFlashLoanNoWithdrawFee).calculateTokenAmount(
+        minToMint = await effectiveSwapContract.calculateTokenAmount(
           poolTokens.map(({ symbol }) => state[symbol].valueSafe),
           true, // deposit boolean
         )
@@ -144,7 +142,7 @@ export function useApproveAndDeposit(
       const txnDeadline = Math.round(
         new Date().getTime() / 1000 + 60 * deadline,
       )
-      const swapFlashLoanContract = effectiveSwapContract as SwapFlashLoan
+      const swapFlashLoanContract = effectiveSwapContract
       const spendTransaction = await swapFlashLoanContract?.addLiquidity(
         txnAmounts,
         minToMint,
