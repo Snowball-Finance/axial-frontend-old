@@ -9,7 +9,6 @@ import { isChainSupportedByNotify, notify } from "../libs/notifyHandler"
 import { useDispatch, useSelector } from "react-redux"
 
 import Deposit from "./deposit/Deposit"
-import PendingSwapsProvider from "../providers/PendingSwapsProvider"
 import Pools from "./pools/Pools"
 import Risk from "./risk/Risk"
 import Swap from "./swap/Swap"
@@ -36,30 +35,28 @@ export default function App(): ReactElement {
     <Suspense fallback={null}>
       <Web3ReactManager>
         <GasAndTokenPrices>
-          <PendingSwapsProvider>
-            <Switch>
-              <Route exact path="/" component={Swap} />
-              <Route exact path="/pools" component={Pools} />
-              {Object.values(POOLS_MAP).map(({ name, route }) => (
-                <Route
-                  exact
-                  path={`/pools/${route}/deposit`}
-                  render={(props) => <Deposit {...props} poolName={name} />}
-                  key={`${name}-deposit`}
-                />
-              ))}
-              {Object.values(POOLS_MAP).map(({ name, route }) => (
-                <Route
-                  exact
-                  path={`/pools/${route}/withdraw`}
-                  render={(props) => <Withdraw {...props} poolName={name} />}
-                  key={`${name}-withdraw`}
-                />
-              ))}
-              <Route exact path="/risk" component={Risk} />
-            </Switch>
-            <Version />
-          </PendingSwapsProvider>
+          <Switch>
+            <Route exact path="/" component={Swap} />
+            <Route exact path="/pools" component={Pools} />
+            {Object.values(POOLS_MAP).map(({ name, route }) => (
+              <Route
+                exact
+                path={`/pools/${route}/deposit`}
+                render={(props) => <Deposit {...props} poolName={name} />}
+                key={`${name}-deposit`}
+              />
+            ))}
+            {Object.values(POOLS_MAP).map(({ name, route }) => (
+              <Route
+                exact
+                path={`/pools/${route}/withdraw`}
+                render={(props) => <Withdraw {...props} poolName={name} />}
+                key={`${name}-withdraw`}
+              />
+            ))}
+            <Route exact path="/risk" component={Risk} />
+          </Switch>
+          <Version />
         </GasAndTokenPrices>
       </Web3ReactManager>
     </Suspense>
@@ -70,23 +67,23 @@ function GasAndTokenPrices({
   children,
 }: React.PropsWithChildren<unknown>): ReactElement {
   const dispatch = useDispatch<AppDispatch>()
-  const { chainId, library } = useActiveWeb3React()
+  //const { chainId, library } = useActiveWeb3React()
 
-  // const fetchAndUpdateGasPrice = useCallback(() => {
-  //   void fetchGasPrices(dispatch)
-  // }, [dispatch])
+  const fetchAndUpdateGasPrice = useCallback(() => {
+    void fetchGasPrices(dispatch)
+  }, [dispatch])
 
-  // const fetchAndUpdateTokensPrice = useCallback(() => {
-  //   fetchTokenPricesUSD(dispatch, chainId, library)
-  // }, [dispatch, chainId, library])
+  const fetchAndUpdateTokensPrice = useCallback(() => {
+    fetchTokenPricesUSD(dispatch)
+  }, [dispatch])
 
-  // const fetchAndUpdateSwapStats = useCallback(() => {
-  //   void fetchSwapStats(dispatch)
-  // }, [dispatch])
+  const fetchAndUpdateSwapStats = useCallback(() => {
+    void fetchSwapStats(dispatch)
+  }, [dispatch])
 
-  // usePoller(fetchAndUpdateGasPrice, 5 * 1000)
-  // usePoller(fetchAndUpdateTokensPrice, BLOCK_TIME * 3)
-  // usePoller(fetchAndUpdateSwapStats, BLOCK_TIME * 280) // ~ 1hr
+  usePoller(fetchAndUpdateGasPrice, 5 * 1000)
+  usePoller(fetchAndUpdateTokensPrice, BLOCK_TIME * 3)
+  usePoller(fetchAndUpdateSwapStats, BLOCK_TIME * 280) // ~ 1hr
 
   return <>{children}</>
 }
