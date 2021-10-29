@@ -6,7 +6,6 @@ import { POOLS_MAP, PoolName } from "../constants"
 import { useCallback, useMemo, useState } from "react"
 
 import { BigNumber } from "@ethersproject/bignumber"
-import { SwapFlashLoanNoWithdrawFee } from "../../types/ethers-contracts/SwapFlashLoanNoWithdrawFee"
 import { debounce } from "lodash"
 import { parseUnits } from "@ethersproject/units"
 import { useActiveWeb3React } from "."
@@ -105,7 +104,7 @@ export default function useWithdrawFormState(
       let nextState: WithdrawFormState | Record<string, unknown>
       if (state.withdrawType === IMBALANCE) {
         try {
-          const inputCalculatedLPTokenAmount = await (swapContract as SwapFlashLoanNoWithdrawFee).calculateTokenAmount(
+          const inputCalculatedLPTokenAmount = await swapContract.calculateTokenAmount(
             POOL.poolTokens.map(
               ({ symbol }) => state.tokenInputs[symbol].valueSafe,
             ),
@@ -138,7 +137,7 @@ export default function useWithdrawFormState(
         }
       } else if (state.withdrawType === ALL) {
         try {
-          const tokenAmounts = await (swapContract as SwapFlashLoanNoWithdrawFee).calculateRemoveLiquidity(
+          const tokenAmounts = await swapContract.calculateRemoveLiquidity(
             effectiveUserLPTokenBalance,
           )
           nextState = {
@@ -166,7 +165,7 @@ export default function useWithdrawFormState(
             const tokenIndex = POOL.poolTokens.findIndex(
               ({ symbol }) => symbol === state.withdrawType,
             )
-            const tokenAmount = await (swapContract as SwapFlashLoanNoWithdrawFee).calculateRemoveLiquidityOneToken(
+            const tokenAmount = await swapContract.calculateRemoveLiquidityOneToken(
               effectiveUserLPTokenBalance, // lp token to be burnt
               tokenIndex,
             ) // actual coin amount to be returned
@@ -185,7 +184,7 @@ export default function useWithdrawFormState(
             }
           } else {
             // This branch addresses a user manually inputting a value for one token
-            const inputCalculatedLPTokenAmount = await (swapContract as SwapFlashLoanNoWithdrawFee).calculateTokenAmount(
+            const inputCalculatedLPTokenAmount = await swapContract.calculateTokenAmount(
               POOL.poolTokens.map(
                 ({ symbol }) => state.tokenInputs[symbol].valueSafe,
               ),

@@ -13,7 +13,6 @@ import LPTOKEN_UNGUARDED_ABI from "../constants/abis/lpTokenUnguarded.json"
 import { LpTokenUnguarded } from "../../types/ethers-contracts/LpTokenUnguarded"
 import META_SWAP_ABI from "../constants/abis/metaSwap.json"
 import { MetaSwap } from "../../types/ethers-contracts/MetaSwap"
-import { SwapFlashLoanNoWithdrawFee } from "../../types/ethers-contracts/SwapFlashLoanNoWithdrawFee"
 import { parseUnits } from "@ethersproject/units"
 import { useActiveWeb3React } from "."
 import { useSelector } from "react-redux"
@@ -115,8 +114,7 @@ export default function usePoolData(
           account ?? undefined,
         ) as MetaSwap
       }
-      const effectiveSwapContract =
-        metaSwapContract || (swapContract as SwapFlashLoanNoWithdrawFee)
+      const effectiveSwapContract = metaSwapContract || swapContract
 
       // Swap fees, price, and LP Token data
       const [swapStorage, aParameter, isPaused] = await Promise.all([

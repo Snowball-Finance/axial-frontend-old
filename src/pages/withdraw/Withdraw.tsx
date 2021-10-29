@@ -7,7 +7,6 @@ import { commify, formatUnits, parseUnits } from "@ethersproject/units"
 
 import { AppState } from "../../store"
 import { BigNumber } from "@ethersproject/bignumber"
-import { SwapFlashLoanNoWithdrawFee } from "../../../types/ethers-contracts/SwapFlashLoanNoWithdrawFee"
 import { Zero } from "@ethersproject/constants"
 import { calculateGasEstimate } from "../../libs/gasEstimate"
 import { calculatePriceImpact } from "../../libs/priceImpact"
@@ -66,7 +65,7 @@ function Withdraw({ poolName }: Props): ReactElement {
       )
       let withdrawLPTokenAmount
       if (poolData.totalLocked.gt(0) && tokenInputSum.gt(0)) {
-        withdrawLPTokenAmount = await (swapContract as SwapFlashLoanNoWithdrawFee).calculateTokenAmount(
+        withdrawLPTokenAmount = await swapContract.calculateTokenAmount(
           POOL.poolTokens.map(
             ({ symbol }) => withdrawFormState.tokenInputs[symbol].valueSafe,
           ),

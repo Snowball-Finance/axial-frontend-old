@@ -14,7 +14,6 @@ import usePoolData, { PoolDataType } from "../../hooks/usePoolData"
 import { AppState } from "../../store"
 import { BigNumber } from "@ethersproject/bignumber"
 import DepositPage from "./DepositPage"
-import { SwapFlashLoanNoWithdrawFee } from "../../../types/ethers-contracts/SwapFlashLoanNoWithdrawFee"
 import { TokenPricesUSD } from "../../store/application"
 import { Zero } from "@ethersproject/constants"
 import { calculateGasEstimate } from "../../libs/gasEstimate"
@@ -129,7 +128,7 @@ function Deposit({ poolName }: Props): ReactElement | null {
       )
       let depositLPTokenAmount
       if (poolData.totalLocked.gt(0) && tokenInputSum.gt(0)) {
-        depositLPTokenAmount = await (swapContract as SwapFlashLoanNoWithdrawFee).calculateTokenAmount(
+        depositLPTokenAmount = await swapContract.calculateTokenAmount(
           POOL.poolTokens.map(({ symbol }) => tokenFormState[symbol].valueSafe),
           true, // deposit boolean
         )
