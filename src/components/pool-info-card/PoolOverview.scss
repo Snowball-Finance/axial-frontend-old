@@ -136,7 +136,7 @@ div.poolOverview {
 }
 
 div.outdated {
-  border-color: $yellow2;
+  border-color: $orange;
 }
 
 .tag {
@@ -147,8 +147,8 @@ div.outdated {
   padding: 2px 4px;
 }
 .tag.warning {
-  border: 1px solid $yellow2;
-  color: $yellow2;
+  border: 1px solid $orange;
+  color: $orange;
 }
 .tag.error {
   border: 1px solid $error;

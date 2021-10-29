@@ -31,10 +31,10 @@ div.poolsPage {
   }
 
   .outdated {
-    color: $yellow;
+    color: $orange;
 
     &.selected {
-      background-color: $yellow;
+      background-color: $orange;
       color: var(--text);
     }
   }
