@@ -32,6 +32,8 @@
     "@typescript-eslint/ban-ts-comment": "off",
     "no-invalid-this": 0,
     "no-unused-vars": "off",
-    "sort-imports": "error"
+    "sort-imports": "error",
+	"prettier/prettier": ["error", { "endOfLine": "auto" }]
+
   }
 }
