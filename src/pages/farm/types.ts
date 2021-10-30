@@ -1,4 +1,4 @@
-export type Farms =
+export type FarmValues =
 	'all' |
 	'joe' |
 	'pangulin' |
@@ -6,7 +6,7 @@ export type Farms =
 	'mine'
 
 
-export const farms: { title: string, value: Farms }[] = [
+export const farms: { title: string, value: FarmValues }[] = [
 	{
 		title: 'All', value: "all"
 	},
@@ -22,14 +22,14 @@ export const farms: { title: string, value: Farms }[] = [
 
 ]
 
-export type Sorts =
+export type SortValues =
 	'none' |
 	'liquidity' |
 	'poolWeight' |
 	'apr'
 
 
-export const sortableFields: { title: string, value: Sorts }[] = [
+export const sortableFields: { title: string, value: SortValues }[] = [
 
 	{
 		title: 'Liquidity', value: "liquidity"
@@ -41,10 +41,10 @@ export const sortableFields: { title: string, value: Sorts }[] = [
 		title: 'APR', value: "apr"
 	},
 ]
-export interface farmSort { value: Sorts, asc: boolean }
+export interface farmSort { value: SortValues, asc: boolean }
 
 export interface FarmState {
-	activeFarm: Farms,
+	activeFarm: FarmValues,
 	search: string,
 	activeSort: farmSort
 }
@@ -55,11 +55,11 @@ export type SearchAction = {
 }
 export type SetFilterAction = {
 	type: 'setFilter',
-	payload: Farms
+	payload: FarmValues
 }
 export type SetSortAction = {
 	type: 'setSort',
-	payload: Sorts
+	payload: SortValues
 }
 
 export type FarmPageActionTypes = SearchAction | SetFilterAction | SetSortAction
