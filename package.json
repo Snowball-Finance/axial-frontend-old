@@ -12,7 +12,7 @@
     "@types/jest": "^26.0.22",
     "@types/lodash": "^4.14.165",
     "@types/node": "^14.14.35",
-    "@types/react": "^17.0.3",
+    "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.7",
     "@types/react-redux": "^7.1.11",
     "@types/react-router-dom": "^5.1.6",
@@ -48,6 +48,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
+	"babel-loader": "8.1.0",
     "@chakra-ui/cli": "^1.2.1",
     "@cypress/code-coverage": "^3.9.4",
     "@cypress/instrument-cra": "^1.4.0",
@@ -97,7 +98,7 @@
     "cy:open": "cypress open",
     "cy:startopen": "start-test 3000 'cypress open'",
     "cy:coverage": "start-test 3000 'cypress run --config video=false'",
-    "postinstall": "typechain --target ethers-v5 'src/constants/abis/*.json' && npm run gen:theme-typings",
+    "postinstall": "typechain --target ethers-v5 src/constants/abis/*.json && npm run gen:theme-typings",
     "gen:theme-typings": "chakra-cli tokens src/theme/index.ts",
     "prepare": "husky install"
   },

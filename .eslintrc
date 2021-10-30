@@ -37,10 +37,9 @@
 	"@typescript-eslint/restrict-template-expressions":"off",
 	"@typescript-eslint/no-unnecessary-type-assertion":"off",
     "no-invalid-this": 0,
- 
     "no-unused-vars": "off",
     "sort-imports": "warn",
-	"prettier/prettier": ["error", { "endOfLine": "auto" }]
+	"prettier/prettier": ["off", { "endOfLine": "auto" }]
 
   }
 }

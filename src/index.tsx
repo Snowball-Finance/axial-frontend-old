@@ -30,9 +30,7 @@ ReactDOM.render(
     <ColorModeScript initialColorMode={chakraTheme.config.initialColorMode} />
     <React.StrictMode>
       <ChakraProvider theme={chakraTheme}>
-        {/*//@ts-ignore*/}
         <Web3ReactProvider getLibrary={getLibrary}>
-          {/*//@ts-ignore*/}
           <Web3ProviderNetwork getLibrary={getNetworkLibrary}>
             <Provider store={store}>
               <Router>

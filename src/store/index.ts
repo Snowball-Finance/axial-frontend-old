@@ -22,6 +22,6 @@ const store = configureStore({
 })
 
 export default store
-
+//@ts-ignore
 export type AppState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
