@@ -5,18 +5,18 @@ import React, { ReactElement, useReducer } from "react"
 import TopMenu from "../../components/menu/TopMenu"
 import { useTranslation } from "react-i18next"
 import {   farmReducer } from "./farmPageReducer"
-import {  FarmValues, SortValues } from "./types"
+import {  Farms, Sorts } from "./types"
 
 function Risk(): ReactElement {
   const { t } = useTranslation()
 
 	const [pageState, dispatch] = useReducer(farmReducer, {
-		activeFarm: FarmValues.all,
+		activeFarm: "all",
 		search: '',
-		activeSort: { value: SortValues.none, asc: false }
+		activeSort: { value: "none", asc: false }
 	})
 
-	const handleFilterChange = (v:FarmValues) => {
+	const handleFilterChange = (v:Farms) => {
 		dispatch({ type: "setFilter", payload: v })
 	}
 
@@ -27,7 +27,7 @@ function Risk(): ReactElement {
 	const handleCancelSearch = () => {
 		dispatch({ type: 'setSearch', payload: '' })
 	}
-	const onSortClick = (v:SortValues) => {
+	const onSortClick = (v:Sorts) => {
 		dispatch({ type: "setSort", payload: v })
 	}
 

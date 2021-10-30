@@ -1,66 +1,65 @@
-export enum FarmValues  {
-	all= 'all',
-	joe= 'joe',
-	pangulin= 'pangulin',
-	stableCoin= 'stableCoin',
-	mine= 'mine'
-}
+export type Farms =
+	'all' |
+	'joe' |
+	'pangulin' |
+	'stableCoin' |
+	'mine'
 
-export const farms = [
+
+export const farms: { title: string, value: Farms }[] = [
 	{
-		title: 'All', value: FarmValues.all
+		title: 'All', value: "all"
 	},
 	{
-		title: 'Joe Farms', value: FarmValues.joe
+		title: 'Joe Farms', value: "joe"
 	}, {
-		title: 'Pangulin Farms', value: FarmValues.pangulin
+		title: 'Pangulin Farms', value: "pangulin"
 	}, {
-		title: 'StableCoin Farms', value: FarmValues.stableCoin
+		title: 'StableCoin Farms', value: "stableCoin"
 	}, {
-		title: 'My Farms', value: FarmValues.mine
+		title: 'My Farms', value: "mine"
 	},
 
 ]
 
-export enum SortValues  {
-	none= 'none',
-	liquidity= 'liquidity',
-	poolWeight= 'poolWeight',
-	apr= 'apr',
-}
+export type Sorts =
+	'none' |
+	'liquidity' |
+	'poolWeight' |
+	'apr'
 
-export const sortableFields = [
+
+export const sortableFields: { title: string, value: Sorts }[] = [
 
 	{
-		title: 'Liquidity', value: SortValues.liquidity
+		title: 'Liquidity', value: "liquidity"
 	},
 	{
-		title: 'Pool Weight', value: SortValues.poolWeight
+		title: 'Pool Weight', value: "poolWeight"
 	},
 	{
-		title: 'APR', value: SortValues.apr
+		title: 'APR', value: "apr"
 	},
 ]
-export interface farmSort
-	{ value: SortValues, asc: boolean }
+export interface farmSort { value: Sorts, asc: boolean }
 
-export interface FarmState{
-	activeFarm: FarmValues,
+export interface FarmState {
+	activeFarm: Farms,
 	search: string,
-	activeSort:farmSort
+	activeSort: farmSort
 }
 
-export type SearchAction={
-    type:'setSearch',
-    payload:string
+export type SearchAction = {
+	type: 'setSearch',
+	payload: string
 }
-export type SetFilterAction={
-    type:'setFilter',
-    payload:FarmValues
+export type SetFilterAction = {
+	type: 'setFilter',
+	payload: Farms
 }
-export type SetSortAction={
-    type:'setSort',
-    payload:SortValues
+export type SetSortAction = {
+	type: 'setSort',
+	payload: Sorts
 }
 
-export type FarmPageActionTypes=SearchAction|SetFilterAction|SetSortAction
+export type FarmPageActionTypes = SearchAction | SetFilterAction | SetSortAction
