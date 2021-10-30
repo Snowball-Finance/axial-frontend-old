@@ -1,0 +1,26 @@
+@import "../../styles/theme";
+@import "../../styles/viewports";
+
+div.farmPage {
+  min-height: 100vh;
+  background: var(--background-main);
+  padding-bottom: 80px;
+  box-sizing: border-box; // Make the padding included in height calculation
+
+  .content {
+    padding-top: 24px;
+    margin: 0 auto;
+    width: 888px;
+    color: var(--text);
+    @include breakpoint(lg) {
+      display: flex;
+      flex-flow: column nowrap;
+      align-items: flex-start;
+      justify-content: center;
+      margin: 0 auto;
+      width: 90%;
+    }
+  }
+ 
+ 
+}

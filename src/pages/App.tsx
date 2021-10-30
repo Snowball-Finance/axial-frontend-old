@@ -21,6 +21,7 @@ import fetchSwapStats from "../libs/getSwapStats"
 import fetchTokenPricesUSD from "../libs/updateTokenPrices"
 import { useActiveWeb3React } from "../hooks"
 import usePoller from "../hooks/usePoller"
+import Farm from "./farm/Farm"
 
 export default function App(): ReactElement {
   const { chainId } = useActiveWeb3React()
@@ -40,6 +41,7 @@ export default function App(): ReactElement {
             <Switch>
               <Route exact path="/" component={Swap} />
               <Route exact path="/pools" component={Pools} />
+              <Route exact path="/farm" component={Farm} />
               {Object.values(POOLS_MAP).map(({ name, route }) => (
                 <Route
                   exact
