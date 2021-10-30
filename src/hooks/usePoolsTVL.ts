@@ -47,7 +47,7 @@ export default function usePoolTVLs(): { [poolName in PoolName]?: BigNumber } {
         .map((c) => c.totalSupply())
       const tvls = await ethcallProvider.all(supplyCalls, {})
       const tvlsUSD = pools.map((pool, i) => {
-        const tvlAmount = tvls[i]
+        const tvlAmount: any = tvls[i]
         let tokenValue = 0
         if (pool.type === PoolTypes.BTC) {
           tokenValue = tokenPricesUSD?.BTC || 0

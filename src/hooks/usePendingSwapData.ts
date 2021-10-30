@@ -372,14 +372,15 @@ async function fetchAndPopulateWithdraws(
   )
   // Step 3: get each event's block
   const withdraws = await Promise.all(
-    events.map((event) => parseWithdrawFromEvent(event, chainId)),
+    events.map((event: any) => parseWithdrawFromEvent(event, chainId)),
   )
 
   // Step 4: write to state
+  //@ts-ignore
   if (withdraws.length === 0) return
   setState((prevState) => {
     const newState = { ...prevState }
-    withdraws.forEach((withdraw) => {
+    withdraws.forEach((withdraw: any) => {
       if (withdraw == null) return
       const existingWithdraws = newState.withdraws[withdraw.itemId]
       newState.withdraws[withdraw.itemId] = (existingWithdraws || []).concat(
@@ -415,14 +416,15 @@ async function fetchAndPopulateSettlements(
   )
   // Step 3: get each event's block
   const settlements = await Promise.all(
-    events.map((event) => parseSettlementFromEvent(event, chainId)),
+    events.map((event: any) => parseSettlementFromEvent(event, chainId)),
   )
 
   // Step 4: write to state
+  //@ts-ignore
   if (settlements.length === 0) return
   setState((prevState) => {
     const newState = { ...prevState }
-    settlements.forEach((settlement) => {
+    settlements.forEach((settlement: any) => {
       if (settlement == null) return
       const existingSettlements = newState.settlements[settlement.itemId]
       newState.settlements[settlement.itemId] = (
