@@ -1,42 +1,10 @@
+import ERC_20 from "../constants/abis/erc20.json"
 import LP_TOKEN_UNGUARDED from "../constants/abis/lpTokenUnguarded.json"
 import { Multicall } from "ethereum-multicall"
 import { ethers } from "ethers"
 
-const getPoolsTVL = (addr: string): ContractCall => {
-  const contractCall = new ContractCall(addr, LP_TOKEN_UNGUARDED)
-  contractCall.setCall("totalSupply", [])
-
-  return contractCall
-}
-
 interface ReturnValues {
   [index: string]: any
-}
-
-class MethodParameter {
-  name: string
-  value: string
-
-  constructor(name: string, value: string) {
-    this.name = name
-    this.value = value
-  }
-}
-
-class MethodBase {
-  reference: string
-  methodName: string
-  methodParameters: MethodParameter[]
-
-  constructor(
-    reference: string,
-    methodName: string,
-    methodParameters: MethodParameter[],
-  ) {
-    this.reference = reference
-    this.methodName = methodName
-    this.methodParameters = methodParameters
-  }
 }
 
 //we need to disable all unsafe protections for any types
@@ -46,6 +14,18 @@ class MethodBase {
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+class MethodBase {
+  reference: string
+  methodName: string
+  methodParameters: any[]
+
+  constructor(reference: string, methodName: string, methodParameters: any[]) {
+    this.reference = reference
+    this.methodName = methodName
+    this.methodParameters = methodParameters
+  }
+}
+
 class ContractCall {
   contractAddress: string
   reference: string
@@ -62,7 +42,7 @@ class ContractCall {
     }
   }
 
-  setCall(methodName: string, methodParams: MethodParameter[], methodId = "") {
+  setCall(methodName: string, methodParams: any[], methodId = "") {
     const call = new MethodBase(
       `${methodName}${methodId}`,
       methodName,
@@ -115,4 +95,21 @@ const convertMBNtoEthersBN = (retArray: ReturnValues) => {
   })
 }
 
-export { ContractCall, getMultiContractData, getPoolsTVL }
+const getPoolsTVL = (addr: string): ContractCall => {
+  const contractCall = new ContractCall(addr, LP_TOKEN_UNGUARDED)
+  contractCall.setCall("totalSupply", [])
+
+  return contractCall
+}
+
+const getUserBalance = (
+  account: string,
+  tokenAddress: string,
+): ContractCall => {
+  const contractCall = new ContractCall(tokenAddress, ERC_20)
+  contractCall.setCall("balanceOf", [account])
+
+  return contractCall
+}
+
+export { ContractCall, getMultiContractData, getPoolsTVL, getUserBalance }

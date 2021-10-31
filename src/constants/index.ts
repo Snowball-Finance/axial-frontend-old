@@ -142,7 +142,7 @@ export const USDT = new Token(
   usdtLogo,
 )
 
-export const STABLECOIN_POOL_TOKENS = [DAI, TUSD, USDT, FRAX]
+export const STABLECOIN_POOL_TOKENS = [DAI, FRAX, TUSD, USDT]
 
 /*
 // Tokenized BTC

@@ -32,7 +32,7 @@ export default function usePoolTVLs(): { [poolName in PoolName]?: BigNumber } {
 
       const tvls = await getMultiContractData(library, contractCalls)
 
-      const tvlsUSD = pools.map((pool, i) => {
+      const tvlsUSD = pools.map((pool) => {
         const tvlAmount = tvls[pool.lpToken.addresses[chainId]].totalSupply // eslint-disable-line
         let tokenValue = 0
         if (pool.type === PoolTypes.BTC) {
