@@ -1,6 +1,7 @@
 @import "../../styles/theme";
 @import "../../styles/viewports";
 
+
 div.farmPage {
   min-height: 100vh;
   background: var(--background-main);
@@ -12,6 +13,9 @@ div.farmPage {
     margin: 0 auto;
     width: 888px;
     color: var(--text);
+    max-width: 1200px;
+    margin: 0 auto;
+
     @include breakpoint(lg) {
       display: flex;
       flex-flow: column nowrap;
@@ -20,7 +24,30 @@ div.farmPage {
       margin: 0 auto;
       width: 90%;
     }
+
+    @import "./pageHeader";
+    @import '../../styles/modules/filters.module';
+    @import './components/farmListItem';
+
+    .farmsListWrapper {
+      display: grid;
+      grid-template-columns: auto auto;
+      gap: 22px;
+      padding: 10px;
+    }
+
+    .inputWrapper {
+      margin-bottom: 24px;
+
+      .searchInput {
+        width: 100%;
+        background: rgb(255, 255, 255);
+        padding: 0.75rem 3.5rem 0.75rem 1rem;
+        border: 1px solid rgb(237, 238, 242);
+        border-radius: 1rem;
+        color: rgb(36, 36, 36);
+      }
+    }
+
   }
- 
- 
 }

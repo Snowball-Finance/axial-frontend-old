@@ -1,0 +1,58 @@
+.farmListItem {
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(235, 235, 245);
+    border-radius: 30px;
+    padding: 1.5rem;
+
+    div.iconsAndName {
+        box-sizing: border-box;
+        margin: 0px;
+        min-width: 0px;
+        width: 100%;
+        display: flex;
+        padding: 0px;
+        align-items: center;
+
+        div.iconsWrapper {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            margin-right: 16px;
+        }
+
+        img.farmIcon {
+            width: 24px;
+            height: 24px;
+            box-shadow: rgb(0 0 0 / 8%) 0px 6px 10px;
+            border-radius: 24px;
+
+        }
+
+    }
+
+    div.dataPart {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem 1rem;
+        margin-top: 1rem;
+
+        div.dataItemTitle {
+            box-sizing: border-box;
+            margin: 0px;
+            min-width: 0px;
+            font-weight: 400;
+            font-size: 14px;
+            color: rgb(189, 189, 189);
+        }
+
+        div.dataItemValue {
+            box-sizing: border-box;
+            margin: 0px;
+            min-width: 0px;
+            font-weight: 400;
+            font-size: 14px;
+            color: rgb(36, 36, 36);
+        }
+    }
+
+}

@@ -38,7 +38,7 @@
 	"@typescript-eslint/no-unnecessary-type-assertion":"off",
     "no-invalid-this": 0,
     "no-unused-vars": "off",
-    "sort-imports": "warn",
+    "sort-imports": "off",
 	"prettier/prettier": ["off", { "endOfLine": "auto" }]
 
   }

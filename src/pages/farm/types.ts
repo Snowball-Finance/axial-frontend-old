@@ -6,21 +6,6 @@ export type FarmValues =
 	'mine'
 
 
-export const farms: { title: string, value: FarmValues }[] = [
-	{
-		title: 'All', value: "all"
-	},
-	{
-		title: 'Joe Farms', value: "joe"
-	}, {
-		title: 'Pangulin Farms', value: "pangulin"
-	}, {
-		title: 'StableCoin Farms', value: "stableCoin"
-	}, {
-		title: 'My Farms', value: "mine"
-	},
-
-]
 
 export type SortValues =
 	'none' |
@@ -29,25 +14,8 @@ export type SortValues =
 	'apr'
 
 
-export const sortableFields: { title: string, value: SortValues }[] = [
-
-	{
-		title: 'Liquidity', value: "liquidity"
-	},
-	{
-		title: 'Pool Weight', value: "poolWeight"
-	},
-	{
-		title: 'APR', value: "apr"
-	},
-]
 export interface farmSort { value: SortValues, asc: boolean }
 
-export interface FarmState {
-	activeFarm: FarmValues,
-	search: string,
-	activeSort: farmSort
-}
 
 export type SearchAction = {
 	type: 'setSearch',
@@ -61,5 +29,30 @@ export type SetSortAction = {
 	type: 'setSort',
 	payload: SortValues
 }
+export type SetPage = {
+	type: 'setPage',
+	payload: number
+}
 
-export type FarmPageActionTypes = SearchAction | SetFilterAction | SetSortAction
+export type FarmPageActionTypes = SearchAction | SetFilterAction | SetSortAction | SetPage
+
+export type FarmModel = {
+	name: string,
+	icons: string[],
+	none?: ''
+	poolWeight: number,
+	liquidity: number,
+	apr: number,
+	userStakedAmount: number,
+	visible?: boolean,
+	farmName: FarmValues,
+}
+export type FarmListModel = FarmModel[]
+export interface FarmState {
+	activeFarm: FarmValues,
+	search: string,
+	activeSort: farmSort,
+	initialFarms: FarmListModel,
+	farms: FarmListModel,
+	activePage: number
+}
