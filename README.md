@@ -2,9 +2,9 @@
 
 [![CI](https://github.com/saddle-finance/saddle-frontend/workflows/CI/badge.svg)](https://github.com/saddle-finance/saddle-frontend/actions?query=workflow%3ACI)
 
-The vault Front-End source code
+The Axial Front-End source code
 
-[thevault.fi](https://dev-vault.snowapi.net/#/) o
+[axial.exchange](https://axial.exchage/) o
 
 ## Installation
 
@@ -12,13 +12,11 @@ The vault Front-End source code
 $ npm install
 ```
 
-Create a `.env.local` file with a valid `REACT_APP_NETWORK_URL` (e.g. hardhat,
-mainnet):
+Create a `.env.local` file with a valid `REACT_APP_NETWORK_URL` (e.g. hardhat, mainnet):
 
 ```bash
 REACT_APP_NETWORK_URL="http://127.0.0.1:8545/"
 ```
-
 ## Usage
 
 ```bash
