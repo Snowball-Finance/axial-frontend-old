@@ -70,38 +70,8 @@ function PoolInfoCard({ data }: Props): ReactElement | null {
       )}
       <div className="info">
         <div className="infoItem">
-          <span className="label bold">{`${t("fee")}:`}</span>
-          <span className="value">{formattedData.swapFee}</span>
-        </div>
-        <div className="infoItem">
-          <ToolTip content={t("aParameterTooltip")}>
-            <span className="label bold underline">{`${t(
-              "aParameter",
-            )}:`}</span>
-          </ToolTip>
-          <span className="value">{formattedData.aParameter}</span>
-        </div>
-        <div className="infoItem">
-          <span className="label bold">{`${t("virtualPrice")}:`}</span>
-          <span className="value">{formattedData.virtualPrice}</span>
-        </div>
-        <div className="infoItem">
-          <span className="label bold">{`${t("utilization")}:`}</span>
-          <span className="value">{formattedData.utilization}</span>
-        </div>
-        <div className="infoItem">
           <span className="label bold">{`${t("totalLocked")}:`}</span>
           <span className="value">{`$${formattedData.reserve}`}</span>
-        </div>
-        <div className="twoColumn">
-          <div className="infoItem">
-            <span className="label bold">{`${t("adminFee")}:`}</span>
-            <span className="value">{formattedData.adminFee}</span>
-          </div>
-          {/* <div className="infoItem">
-            <span className="label bold">{t("dailyVolume") + ": "}</span>
-            <span className="value">{formattedData.volume}</span>
-          </div> */}
         </div>
       </div>
       <div className="divider" />
