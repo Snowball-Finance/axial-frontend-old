@@ -1,5 +1,4 @@
 import { POOLS_MAP, SWAP_TYPES, TRANSACTION_TYPES } from "../constants"
-import { notifyCustomError, notifyHandler } from "../libs/notifyHandler"
 import { AppState } from "../store"
 import { BigNumber } from "@ethersproject/bignumber"
 import { Bridge } from "../../types/ethers-contracts/Bridge"
@@ -179,9 +178,6 @@ export function useApproveAndSwap(): (
       } else {
         throw new Error("Invalid Swap Type, or contract not loaded")
       }
-      if (swapTransaction?.hash) {
-        notifyHandler(swapTransaction.hash, "swap")
-      }
 
       await swapTransaction?.wait()
       dispatch(
@@ -192,7 +188,6 @@ export function useApproveAndSwap(): (
       return Promise.resolve()
     } catch (e) {
       console.error(e)
-      notifyCustomError(e as Error)
     }
   }
 }

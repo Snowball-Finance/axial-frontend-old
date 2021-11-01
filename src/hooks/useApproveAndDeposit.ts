@@ -1,6 +1,5 @@
 import { POOLS_MAP, PoolName, TRANSACTION_TYPES, Token } from "../constants"
 import { formatDeadlineToNumber, getContract } from "../libs"
-import { notifyCustomError, notifyHandler } from "../libs/notifyHandler"
 import {
   useAllContracts,
   useLPTokenContract,
@@ -152,8 +151,6 @@ export function useApproveAndDeposit(
         },
       )
 
-      notifyHandler(spendTransaction.hash, "deposit")
-
       await spendTransaction.wait()
       dispatch(
         updateLastTransactionTimes({
@@ -163,7 +160,6 @@ export function useApproveAndDeposit(
       return Promise.resolve()
     } catch (e) {
       console.error(e)
-      notifyCustomError(e as Error)
     }
   }
 }

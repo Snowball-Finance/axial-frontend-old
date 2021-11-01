@@ -5,7 +5,6 @@ import { AppDispatch, AppState } from "../store"
 import { BLOCK_TIME, POOLS_MAP } from "../constants"
 import React, { ReactElement, Suspense, useCallback, useEffect } from "react"
 import { Route, Switch } from "react-router-dom"
-import { isChainSupportedByNotify, notify } from "../libs/notifyHandler"
 import { useDispatch, useSelector } from "react-redux"
 
 import Deposit from "./deposit/Deposit"
@@ -18,19 +17,9 @@ import Withdraw from "./withdraw/Withdraw"
 import fetchGasPrices from "../libs/updateGasPrices"
 import fetchSwapStats from "../libs/getSwapStats"
 import fetchTokenPricesUSD from "../libs/updateTokenPrices"
-import { useActiveWeb3React } from "../hooks"
 import usePoller from "../hooks/usePoller"
 
 export default function App(): ReactElement {
-  const { chainId } = useActiveWeb3React()
-  const { userDarkMode } = useSelector((state: AppState) => state.user)
-
-  useEffect(() => {
-    notify?.config({
-      networkId: isChainSupportedByNotify(chainId) ? chainId : undefined,
-      darkMode: userDarkMode,
-    })
-  }, [chainId, userDarkMode])
   return (
     <Suspense fallback={null}>
       <Web3ReactManager>
