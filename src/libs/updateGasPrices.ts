@@ -14,7 +14,7 @@ const fetchGasFromChain = async (): Promise<GenericGasReponse> => {
     const provider = new ethers.providers.StaticJsonRpcProvider(
       "https://api.avax.network/ext/bc/C/rpc",
     )
-    const gasPrice = +(await provider.getGasPrice())
+    const gasPrice = +(await provider.getGasPrice()) / 1e9
 
     const response: GenericGasReponse = {
       gasStandard: gasPrice,

@@ -12,7 +12,7 @@ import usdtLogo from "../assets/icons/usdt.svg"
 import walletconnectIcon from "../assets/icons/walletconnect.svg"
 
 export const NetworkContextName = "NETWORK"
-export const STABLECOIN_POOL_NAME = "Stablecoin Pool"
+export const STABLECOIN_POOL_NAME = "S4D Snowball"
 export type PoolName = typeof STABLECOIN_POOL_NAME
 
 export enum ChainId {
@@ -124,7 +124,7 @@ export const TUSD = new Token(
   TUSD_CONTRACT_ADDRESSES,
   18,
   "TUSD",
-  "tusd-coin",
+  "true-usd",
   "TUSD Coin",
   usdcLogo,
 )
