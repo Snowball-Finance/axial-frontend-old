@@ -4,6 +4,8 @@
 .advancedOptions {
   width: 100%;
   margin-top: 24px;
+  margin-bottom: 24px;
+
   @include breakpoint(lg) {
     margin: 12px auto 20px;
     width: 434px;
@@ -57,7 +59,7 @@
       border-radius: 8px;
       height: 28px;
       font-size: 80%;
-      color: var(--text);
+      color: $primary;
       padding: 2px 4px;
       margin: 0 6px 0 8px;
       outline: none !important;
