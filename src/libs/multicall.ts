@@ -3,10 +3,6 @@ import LP_TOKEN_UNGUARDED from "../constants/abis/lpTokenUnguarded.json"
 import { Multicall } from "ethereum-multicall"
 import { ethers } from "ethers"
 
-interface ReturnValues {
-  [index: string]: any
-}
-
 //we need to disable all unsafe protections for any types
 //because all returns from this lib are generic
 
@@ -14,6 +10,12 @@ interface ReturnValues {
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+interface ReturnValues {
+  [index: string]: any
+}
+
 class MethodBase {
   reference: string
   methodName: string
@@ -42,7 +44,7 @@ class ContractCall {
     }
   }
 
-  setCall(methodName: string, methodParams: any[], methodId = "") {
+  setCall(methodName: string, methodParams: any[], methodId = ""): void {
     const call = new MethodBase(
       `${methodName}${methodId}`,
       methodName,
@@ -55,10 +57,10 @@ class ContractCall {
 
 //contract array should be provided with
 // [ {reference: string, contractCalls: [ {reference: string, methodName: string, methodParameters: any}, ... ], abi: []}, ... ]
-const getMultiContractData = async (
+async function getMultiContractData(
   provider: ethers.providers.BaseProvider,
   contractArray: ContractCall[],
-) => {
+): Promise<ReturnValues> {
   const multicall = new Multicall({ ethersProvider: provider })
   const call = await multicall.call(contractArray)
 
@@ -86,7 +88,7 @@ const getMultiContractData = async (
 }
 
 //convert Multicall BN to Ethers BN
-const convertMBNtoEthersBN = (retArray: ReturnValues) => {
+function convertMBNtoEthersBN(retArray: ReturnValues) {
   return retArray.map((ret: any) => {
     if (ret.type === "BigNumber") {
       return ethers.BigNumber.from(ret)
@@ -95,17 +97,14 @@ const convertMBNtoEthersBN = (retArray: ReturnValues) => {
   })
 }
 
-const getPoolsTVL = (addr: string): ContractCall => {
+function getPoolsTVL(addr: string): ContractCall {
   const contractCall = new ContractCall(addr, LP_TOKEN_UNGUARDED)
   contractCall.setCall("totalSupply", [])
 
   return contractCall
 }
 
-const getUserBalance = (
-  account: string,
-  tokenAddress: string,
-): ContractCall => {
+function getUserBalance(account: string, tokenAddress: string): ContractCall {
   const contractCall = new ContractCall(tokenAddress, ERC_20)
   contractCall.setCall("balanceOf", [account])
 

@@ -1,6 +1,6 @@
-import { BLOCK_TIME, TOKENS_MAP } from "../../constants"
 import { getMultiContractData, getUserBalance } from "../../libs/multicall"
 import { BigNumber } from "@ethersproject/bignumber"
+import { TOKENS_MAP } from "../../constants"
 import { useActiveWeb3React } from "../../hooks"
 import usePoller from "../../hooks/usePoller"
 import { useState } from "react"

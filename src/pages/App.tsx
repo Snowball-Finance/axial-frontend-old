@@ -1,11 +1,10 @@
 import "../styles/global.scss"
 import "../styles/NotifyStyle.scss"
 
-import { AppDispatch, AppState } from "../store"
 import { BLOCK_TIME, POOLS_MAP } from "../constants"
-import React, { ReactElement, Suspense, useCallback, useEffect } from "react"
+import React, { ReactElement, Suspense, useCallback } from "react"
 import { Route, Switch } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
+import { AppDispatch } from "../store"
 
 import Deposit from "./deposit/Deposit"
 import Pools from "./pools/Pools"
@@ -15,8 +14,9 @@ import Version from "../components/version/Version"
 import Web3ReactManager from "../components/Web3ReactManager"
 import Withdraw from "./withdraw/Withdraw"
 import fetchGasPrices from "../libs/updateGasPrices"
-import fetchSwapStats from "../libs/getSwapStats"
+//import fetchSwapStats from "../libs/getSwapStats"
 import fetchTokenPricesUSD from "../libs/updateTokenPrices"
+import { useDispatch } from "react-redux"
 import usePoller from "../hooks/usePoller"
 
 export default function App(): ReactElement {
@@ -66,9 +66,10 @@ function GasAndTokenPrices({
     fetchTokenPricesUSD(dispatch)
   }, [dispatch])
 
-  const fetchAndUpdateSwapStats = useCallback(() => {
+  //this one still needs api work
+  /*const fetchAndUpdateSwapStats = useCallback(() => {
     void fetchSwapStats(dispatch)
-  }, [dispatch])
+  }, [dispatch])*/
 
   usePoller(fetchAndUpdateGasPrice, 5 * 1000)
   usePoller(fetchAndUpdateTokensPrice, BLOCK_TIME * 120)
