@@ -1,4 +1,10 @@
-import { POOLS_MAP, PoolTypes, STABLECOIN_POOL_NAME } from "../../constants"
+import {
+  AXIAL_A4D_POOL_NAME,
+  POOLS_MAP,
+  PoolName,
+  PoolTypes,
+  STABLECOIN_POOL_NAME,
+} from "../../constants"
 import React, { ReactElement, useState } from "react"
 
 import ConfirmTransaction from "../../components/confirm-transaction/ConfirmTransaction"
@@ -12,18 +18,28 @@ import usePoolData from "../../hooks/usePoolData"
 
 function Pools(): ReactElement | null {
   const [usdPoolData, usdUserShareData] = usePoolData(STABLECOIN_POOL_NAME)
+  const [a4dPoolData, a4dUserShareData] = usePoolData(AXIAL_A4D_POOL_NAME)
   const [currentModal, setCurrentModal] = useState<string | null>(null)
   const [filter, setFilter] = useState<PoolTypes | "all" | "outdated">("all")
   const handleClickMigrate = () => {
     setCurrentModal("migrate")
   }
 
-  function getPropsForPool() {
-    return {
-      name: STABLECOIN_POOL_NAME,
-      poolData: usdPoolData,
-      userShareData: usdUserShareData,
-      poolRoute: "/pools/usd",
+  function getPropsForPool(poolName: PoolName) {
+    if (poolName === AXIAL_A4D_POOL_NAME) {
+      return {
+        name: AXIAL_A4D_POOL_NAME,
+        poolData: usdPoolData,
+        userShareData: usdUserShareData,
+        poolRoute: "/pools/usd",
+      }
+    } else {
+      return {
+        name: STABLECOIN_POOL_NAME,
+        poolData: a4dPoolData,
+        userShareData: a4dUserShareData,
+        poolRoute: "/pools/a4d",
+      }
     }
   }
   return (
@@ -35,13 +51,11 @@ function Pools(): ReactElement | null {
           [PoolTypes.BTC, "BTC"] as const,
           [PoolTypes.ETH, "ETH"] as const,
           [PoolTypes.USD, "USD"] as const,
-          ["outdated", "OUTDATED"] as const,
         ].map(([filterKey, text]) => (
           <li
             key={filterKey}
             className={classNames(styles.filterTab, {
               [styles.selected]: filter === filterKey,
-              [styles.outdated]: filterKey === "outdated",
             })}
             onClick={(): void => setFilter(filterKey)}
           >
@@ -58,8 +72,8 @@ function Pools(): ReactElement | null {
               (filter === "outdated" && (migration || isOutdated)),
           )
           .map(
-            ({ migration, isOutdated }) =>
-              [getPropsForPool(), migration, isOutdated] as const,
+            ({ name, migration, isOutdated }) =>
+              [getPropsForPool(name), migration, isOutdated] as const,
           )
           .sort(
             ([a, aMigration, aIsOutdated], [b, bMigration, bIsOutdated]) => {
