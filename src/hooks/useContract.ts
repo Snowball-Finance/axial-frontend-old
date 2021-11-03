@@ -1,4 +1,6 @@
 import {
+  AXIAL_A4D_POOL_NAME,
+  AXIAL_A4D_SWAP_TOKEN,
   DAI,
   FRAX,
   POOLS_MAP,
@@ -7,6 +9,7 @@ import {
   STABLECOIN_SWAP_TOKEN,
   TUSD,
   Token,
+  USDC,
   USDT,
 } from "../constants"
 
@@ -60,7 +63,7 @@ export function useTokenContract(
 
 export function useSwapContract<T extends PoolName>(
   poolName?: T,
-): T extends typeof STABLECOIN_POOL_NAME
+): T extends typeof STABLECOIN_POOL_NAME | typeof AXIAL_A4D_POOL_NAME
   ? SwapFlashLoanNoWithdrawFee | null
   : SwapFlashLoan | SwapGuarded | MetaSwapDeposit | null
 export function useSwapContract(
@@ -95,7 +98,7 @@ export function useSwapContract(
 
 export function useLPTokenContract<T extends PoolName>(
   poolName: T,
-): T extends typeof STABLECOIN_POOL_NAME
+): T extends typeof STABLECOIN_POOL_NAME | typeof AXIAL_A4D_POOL_NAME
   ? LpTokenGuarded | null
   : LpTokenUnguarded | null
 
@@ -129,8 +132,14 @@ export function useAllContracts(): AllContractsObject | null {
   const tusdContract = useTokenContract(TUSD) as Erc20
   const usdtContract = useTokenContract(USDT) as Erc20
   const fraxContract = useTokenContract(FRAX) as Erc20
+  const usdcContract = useTokenContract(USDC) as Erc20
+
   const stablecoinSwapTokenContract = useTokenContract(
     STABLECOIN_SWAP_TOKEN,
+  ) as LpTokenUnguarded
+
+  const axiala4dSwapTokenContract = useTokenContract(
+    AXIAL_A4D_SWAP_TOKEN,
   ) as LpTokenUnguarded
 
   return useMemo(() => {
@@ -139,7 +148,9 @@ export function useAllContracts(): AllContractsObject | null {
         daiContract,
         tusdContract,
         usdtContract,
+        usdcContract,
         fraxContract,
+        axiala4dSwapTokenContract,
         stablecoinSwapTokenContract,
       ].some(Boolean)
     )
@@ -148,14 +159,18 @@ export function useAllContracts(): AllContractsObject | null {
       [DAI.symbol]: daiContract,
       [TUSD.symbol]: tusdContract,
       [USDT.symbol]: usdtContract,
+      [USDC.symbol]: usdcContract,
       [FRAX.symbol]: fraxContract,
+      [AXIAL_A4D_SWAP_TOKEN.symbol]: axiala4dSwapTokenContract,
       [STABLECOIN_SWAP_TOKEN.symbol]: stablecoinSwapTokenContract,
     }
   }, [
     daiContract,
     tusdContract,
     usdtContract,
+    usdcContract,
     fraxContract,
+    axiala4dSwapTokenContract,
     stablecoinSwapTokenContract,
   ])
 }
