@@ -93,6 +93,14 @@ const SwapPage = (props: Props): ReactElement => {
     (slippageSelected === Slippages.Custom &&
       parseFloat(slippageCustom?.valueRaw || "0") < 0.5)
 
+  const modalData = {
+    from: fromState,
+    to: toState,
+    exchangeRateInfo,
+    txnGasCost,
+    swapType,
+  }
+
   return (
     <div className="swapPage">
       <TopMenu activeTab={"swap"} />
@@ -127,7 +135,7 @@ const SwapPage = (props: Props): ReactElement => {
               selected={fromState.symbol}
               inputValue={fromState.value}
               inputValueUSD={fromState.valueUSD}
-              isSwapFrom={true}
+              isSwapFrom
             />
           </div>
           <div style={{ height: "48px" }}></div>
@@ -212,13 +220,13 @@ const SwapPage = (props: Props): ReactElement => {
             </>
           )}
         </div>
-        {account && isHighPriceImpact(exchangeRateInfo.priceImpact) ? (
+        {account && isHighPriceImpact(exchangeRateInfo.priceImpact) && (
           <div className="exchangeWarning">
             {t("highPriceImpact", {
               rate: formattedPriceImpact,
             })}
           </div>
-        ) : null}
+        )}
         {isVirtualSwap && (
           <div className="virtualSwapInfoBubble">
             <InfoIcon />
@@ -250,7 +258,7 @@ const SwapPage = (props: Props): ReactElement => {
           isOpen={!!currentModal}
           onClose={(): void => setCurrentModal(null)}
         >
-          {currentModal === "review" ? (
+          {currentModal === "review" && (
             <ReviewSwap
               onClose={(): void => setCurrentModal(null)}
               onConfirm={async (): Promise<void> => {
@@ -262,16 +270,10 @@ const SwapPage = (props: Props): ReactElement => {
                 await onConfirmTransaction?.()
                 setCurrentModal(null)
               }}
-              data={{
-                from: fromState,
-                to: toState,
-                exchangeRateInfo,
-                txnGasCost,
-                swapType,
-              }}
+              data={modalData}
             />
-          ) : null}
-          {currentModal === "confirm" ? <ConfirmTransaction /> : null}
+          )}
+          {currentModal === "confirm" && <ConfirmTransaction />}
         </Modal>
       </div>
     </div>

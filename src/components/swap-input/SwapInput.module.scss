@@ -9,8 +9,12 @@
   background-color: $primary-shade;
 }
 
+.selectTokenGroup {
+  display: flex;
+}
 .selectGroup {
   display: flex;
+  flex-grow: 1;
   align-items: center;
   &.hoverPointer {
     &:hover {
@@ -48,7 +52,7 @@
     cursor: default;
     outline: none;
     text-align: right;
-    background-color:$primary-shade;
+    background-color: $primary-shade;
     color: var(--text);
     width: 100%;
   }
