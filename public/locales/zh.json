@@ -46,7 +46,7 @@
   "highPriceImpactConfirmation": "警告：本次交易价格影响过高，将会造成资金损失。其原因要么是交易数量不合适，要么是流动性不足。在提交交易前，请确认您了解风险。",
   "iConfirm": "确认",
   "infiniteApproval": "无限授权",
-  "infiniteApprovalTooltip": "授权Saddle此次和以后都可使用所选代币，您以后无需重新授权。",
+  "infiniteApprovalTooltip": "授权Vault此次和以后都可使用所选代币，您以后无需重新授权。",
   "inputNotValid": "无效的输入值",
   "instant": "立刻",
   "insufficientBalance": "余额不足",
