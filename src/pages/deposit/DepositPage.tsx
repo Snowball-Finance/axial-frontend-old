@@ -1,9 +1,9 @@
 import "./DepositPage.scss"
 
-import { Button, Center } from "@chakra-ui/react"
 import { PoolDataType, UserShareType } from "../../hooks/usePoolData"
 import React, { ReactElement, useState } from "react"
 import AdvancedOptions from "../../components/advance-options/AdvancedOptions"
+import Button from "../../components/button/Button"
 
 import CheckboxInput from "../../components/checkbox-input/CheckboxInput"
 import ConfirmTransaction from "../../components/confirm-transaction/ConfirmTransaction"
@@ -15,7 +15,7 @@ import ReviewDeposit from "../../components/reviews/ReviewDeposit"
 import TokenInput from "../../components/token-input/TokenInput"
 import TopMenu from "../../components/menu/TopMenu"
 import { formatBNToPercentString } from "../../libs"
-import { logEvent } from "../../libs/googleAnalytics"
+//import { logEvent } from "../../libs/googleAnalytics"
 import { useTranslation } from "react-i18next"
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -123,19 +123,15 @@ const DepositPage = (props: Props): ReactElement => {
             </div>
           </div>
           <AdvancedOptions />
-          <Center width="100%" py={6}>
-            <Button
-              variant="primary"
-              size="lg"
-              width="240px"
-              onClick={(): void => {
-                setCurrentModal("review")
-              }}
-              disabled={!validDepositAmount || poolData?.isPaused}
-            >
-              {t("deposit")}
-            </Button>
-          </Center>
+          <Button
+            kind="primary"
+            onClick={(): void => {
+              setCurrentModal("review")
+            }}
+            disabled={!validDepositAmount || poolData?.isPaused}
+          >
+            {t("deposit")}
+          </Button>
         </div>
         <div className="infoPanels">
           <MyShareCard data={myShareData} />
@@ -156,10 +152,6 @@ const DepositPage = (props: Props): ReactElement => {
               transactionData={transactionData}
               onConfirm={async (): Promise<void> => {
                 setCurrentModal("confirm")
-                logEvent(
-                  "deposit",
-                  (poolData && { pool: poolData?.name }) || {},
-                )
                 await onConfirmTransaction?.()
                 setCurrentModal(null)
               }}
