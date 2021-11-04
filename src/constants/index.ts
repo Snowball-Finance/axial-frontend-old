@@ -2,11 +2,11 @@ import { injected, walletconnect, walletlink } from "../connectors"
 
 import { AbstractConnector } from "@web3-react/abstract-connector"
 import { BigNumber } from "@ethersproject/bignumber"
+import axialLogo from "../assets/icons/logo.svg" // this needs a smaller icon logo(24)
 import coinbasewalletIcon from "../assets/icons/coinbasewallet.svg"
 import daiLogo from "../assets/icons/dai.svg"
 import fraxLogo from "../assets/icons/frax.svg"
 import metamaskIcon from "../assets/icons/metamask.svg"
-import saddleLogo from "../assets/icons/logo_24.svg"
 import tusdLogo from "../assets/icons/tusd.svg"
 import usdcLogo from "../assets/icons/usdc.svg"
 import usdtLogo from "../assets/icons/usdt.svg"
@@ -96,7 +96,7 @@ export const STABLECOIN_SWAP_TOKEN = new Token(
   "s4dUSD",
   "s4dusd",
   "S4D DAI.e/USDT.e/FRAX/TUSD",
-  saddleLogo,
+  axialLogo,
   false,
   true,
 )
@@ -107,7 +107,7 @@ export const AXIAL_A4D_SWAP_TOKEN = new Token(
   "a4dUSD",
   "a4dusd",
   "A4D DAI.e/USDC.e/USDT.e/TUSD",
-  saddleLogo,
+  axialLogo,
   false,
   true,
 )
@@ -192,81 +192,6 @@ export const USDC = new Token(
 
 export const AXIAL_A4D_POOL_TOKENS = [DAI, USDT, TUSD, USDC]
 export const STABLECOIN_POOL_TOKENS = [DAI, FRAX, TUSD, USDT]
-
-/*
-// Tokenized BTC
-const TBTC_CONTRACT_ADDRESSES: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: "0x8daebade922df735c38c80c7ebd708af50815faa",
-  [ChainId.HARDHAT]: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
-}
-export const TBTC = new Token(
-  TBTC_CONTRACT_ADDRESSES,
-  18,
-  "TBTC",
-  "tbtc",
-  "tBTC",
-  tbtcLogo,
-)
-
-const TBTC_V2_CONTRACT_ADDRESSES: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: "0x18084fba666a33d37592fa2633fd49a74dd93a88",
-  [ChainId.HARDHAT]: "0x82e01223d51Eb87e16A03E24687EDF0F294da6f1",
-}
-export const TBTC_V2 = new Token(
-  TBTC_V2_CONTRACT_ADDRESSES,
-  18,
-  "TBTCv2",
-  "tbtc",
-  "tBTCv2",
-  tbtcLogo,
-)
-
-const WBTC_CONTRACT_ADDRESSES: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599",
-  [ChainId.HARDHAT]: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
-}
-export const WBTC = new Token(
-  WBTC_CONTRACT_ADDRESSES,
-  8,
-  "WBTC",
-  "wrapped-bitcoin",
-  "WBTC",
-  wbtcLogo,
-)
-
-const RENBTC_CONTRACT_ADDRESSES: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: "0xeb4c2781e4eba804ce9a9803c67d0893436bb27d",
-  [ChainId.HARDHAT]: "0x0165878A594ca255338adfa4d48449f69242Eb8F",
-}
-export const RENBTC = new Token(
-  RENBTC_CONTRACT_ADDRESSES,
-  8,
-  "RENBTC",
-  "renbtc",
-  "renBTC",
-  renbtcLogo,
-)
-
-const SBTC_CONTRACT_ADDRESSES: { [chainId in ChainId]: string } = {
-  [ChainId.MAINNET]: "0xfe18be6b3bd88a2d2a7f928d00292e7a9963cfc6",
-  [ChainId.HARDHAT]: "0x2279B7A0a67DB372996a5FaB50D91eAA73d2eBe6",
-}
-export const SBTC = new Token(
-  SBTC_CONTRACT_ADDRESSES,
-  18,
-  "sBTC",
-  "sbtc",
-  "sBTC",
-  sbtcLogo,
-  true,
-)
-
-export const BTC_POOL_TOKENS = [TBTC, WBTC, RENBTC, SBTC]
-export const BTC_POOL_V2_TOKENS = [WBTC, RENBTC, SBTC]
-
-export const TBTC_POOL_TOKENS = [TBTC_V2, ...BTC_POOL_V2_TOKENS]
-export const TBTC_UNDERLYING_POOL_TOKENS = [TBTC_V2, BTC_SWAP_V2_TOKEN]
-*/
 
 export type Pool = {
   name: PoolName
