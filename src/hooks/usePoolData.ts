@@ -28,7 +28,7 @@ export type Partners = "keep" | "sharedStake" | "alchemix"
 export interface PoolDataType {
   adminFee: BigNumber
   aParameter: BigNumber
-  apy: BigNumber | null
+  apy: number | null
   name: string
   reserve: BigNumber | null
   swapFee: BigNumber
@@ -36,7 +36,7 @@ export interface PoolDataType {
   totalLocked: BigNumber
   utilization: BigNumber | null
   virtualPrice: BigNumber
-  volume: BigNumber | null
+  volume: number | null
   isPaused: boolean
   lpTokenPriceUSD: BigNumber
   lpToken: string
@@ -56,7 +56,7 @@ export type PoolDataHookReturnType = [PoolDataType, UserShareType | null]
 const emptyPoolData = {
   adminFee: Zero,
   aParameter: Zero,
-  apy: null,
+  apy: 0,
   name: "",
   reserve: null,
   swapFee: Zero,
@@ -64,7 +64,7 @@ const emptyPoolData = {
   totalLocked: Zero,
   utilization: null,
   virtualPrice: Zero,
-  volume: null,
+  volume: 0,
   aprs: {},
   lpTokenPriceUSD: Zero,
   lpToken: "",
@@ -224,7 +224,7 @@ export default function usePoolData(
         ),
         value: userPoolTokenBalances[i],
       }))
-      const poolAddress = POOL.addresses[chainId].toLowerCase()
+      const poolAddress = POOL.addresses[chainId]
       const { oneDayVolume, apy, utilization } =
         swapStats && poolAddress in swapStats
           ? swapStats[poolAddress]
@@ -238,9 +238,9 @@ export default function usePoolData(
         adminFee: adminFee,
         swapFee: swapFee,
         aParameter: aParameter,
-        volume: oneDayVolume ? parseUnits(oneDayVolume, 18) : null,
+        volume: oneDayVolume,
         utilization: utilization ? parseUnits(utilization, 18) : null,
-        apy: apy ? parseUnits(apy, 18) : null,
+        apy: apy,
         lpTokenPriceUSD,
         lpToken: POOL.lpToken.symbol,
         isPaused,

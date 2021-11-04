@@ -3,11 +3,7 @@ import "./PoolOverview.scss"
 import { POOLS_MAP, PoolTypes, TOKENS_MAP } from "../../constants"
 import { PoolDataType, UserShareType } from "../../hooks/usePoolData"
 import React, { ReactElement } from "react"
-import {
-  formatBNToPercentString,
-  formatBNToShortString,
-  formatBNToString,
-} from "../../libs"
+import { formatBNToShortString, formatBNToString } from "../../libs"
 
 import Button from "../button/Button"
 import { Link } from "react-router-dom"
@@ -37,10 +33,8 @@ export default function PoolOverview({
     reserve: poolData.reserve
       ? formatBNToShortString(poolData.reserve, 18)
       : "-",
-    apy: poolData.apy ? `${formatBNToPercentString(poolData.apy, 18, 2)}` : "-",
-    volume: poolData.volume
-      ? `$${formatBNToShortString(poolData.volume, 18)}`
-      : "-",
+    apy: poolData.apy ? `${poolData.apy}%` : "-",
+    volume: poolData.volume ? `$${poolData.volume}` : "-",
     userBalanceUSD: formatBNToShortString(
       userShareData?.usdBalance || Zero,
       18,
