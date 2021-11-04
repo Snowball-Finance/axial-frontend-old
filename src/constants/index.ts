@@ -7,6 +7,7 @@ import daiLogo from "../assets/icons/dai.svg"
 import fraxLogo from "../assets/icons/frax.svg"
 import metamaskIcon from "../assets/icons/metamask.svg"
 import saddleLogo from "../assets/icons/logo_24.svg"
+import tusdLogo from "../assets/icons/tusd.svg"
 import usdcLogo from "../assets/icons/usdc.svg"
 import usdtLogo from "../assets/icons/usdt.svg"
 import walletconnectIcon from "../assets/icons/walletconnect.svg"
@@ -154,7 +155,7 @@ export const TUSD = new Token(
   "TUSD",
   "true-usd",
   "TUSD Coin",
-  usdcLogo,
+  tusdLogo,
   false,
   false,
 )
