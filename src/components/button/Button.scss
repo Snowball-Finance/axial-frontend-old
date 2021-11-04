@@ -12,9 +12,13 @@ button.button {
   cursor: pointer;
   padding: 1px 6px;
 
+  &:disabled:hover {
+    cursor: not-allowed;
+  }
+
   &:disabled {
     cursor: not-allowed;
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.3);
   }
 
   &:hover,
@@ -39,6 +43,7 @@ button.button {
     color: $secondary-focus;
     font-weight: $bold;
     border: 1px solid var(--outline);
+
     &:disabled {
       cursor: not-allowed;
       color: var(--text-secondary-button-disabled);
@@ -66,7 +71,7 @@ button.button {
 
     &:disabled {
       cursor: not-allowed;
-      color: rgba(0, 0, 0, 0.2);
+      color: rgba(0, 0, 0, 0.3);
     }
 
     &:enabled:hover,
