@@ -14,7 +14,7 @@ import Version from "../components/version/Version"
 import Web3ReactManager from "../components/Web3ReactManager"
 import Withdraw from "./withdraw/Withdraw"
 import fetchGasPrices from "../libs/updateGasPrices"
-//import fetchSwapStats from "../libs/getSwapStats"
+import fetchSwapStats from "../libs/getSwapStats"
 import fetchTokenPricesUSD from "../libs/updateTokenPrices"
 import { useDispatch } from "react-redux"
 import usePoller from "../hooks/usePoller"
@@ -67,13 +67,13 @@ function GasAndTokenPrices({
   }, [dispatch])
 
   //this one still needs api work
-  /*const fetchAndUpdateSwapStats = useCallback(() => {
+  const fetchAndUpdateSwapStats = useCallback(() => {
     void fetchSwapStats(dispatch)
-  }, [dispatch])*/
+  }, [dispatch])
 
   usePoller(fetchAndUpdateGasPrice, 5 * 1000)
   usePoller(fetchAndUpdateTokensPrice, BLOCK_TIME * 120)
-  //usePoller(fetchAndUpdateSwapStats, BLOCK_TIME * 2 * 60 * 60) // ~ 1hr
+  usePoller(fetchAndUpdateSwapStats, BLOCK_TIME * 2 * 60 * 60) // ~ 1hr
 
   return <>{children}</>
 }

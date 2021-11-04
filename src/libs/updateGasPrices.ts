@@ -12,9 +12,9 @@ interface GenericGasReponse {
 const fetchGasFromChain = async (): Promise<GenericGasReponse> => {
   try {
     const provider = new ethers.providers.StaticJsonRpcProvider(
-      "https://api.avax.network/ext/bc/C/rpc",
+      process.env.REACT_APP_NETWORK_URL,
     )
-    const gasPrice = +(await provider.getGasPrice()) / 1e9
+    const gasPrice = Math.floor((await provider.getGasPrice()).toNumber() / 1e9)
 
     const response: GenericGasReponse = {
       gasStandard: gasPrice,
@@ -38,7 +38,7 @@ export default async function fetchGasPrices(
     () =>
       fetchGasFromChain()
         .then(dispatchUpdate)
-        .catch(() => fetchGasFromChain().then(dispatchUpdate)), // else fall back to poa before retrying
+        .catch(() => fetchGasFromChain().then(dispatchUpdate)),
     {
       retries: 3,
     },
