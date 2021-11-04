@@ -9,7 +9,7 @@
     "@emotion/styled": "^11.1.5",
     "@metamask/jazzicon": "^2.0.0",
     "@reduxjs/toolkit": "^1.4.0",
-    "@types/jest": "^26.0.22",
+    "@types/jest": "^27.0.2",
     "@types/lodash": "^4.14.165",
     "@types/node": "^14.14.35",
     "@types/react": "^17.0.3",
